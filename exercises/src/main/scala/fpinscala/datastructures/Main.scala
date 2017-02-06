@@ -25,14 +25,17 @@ object Main {
     println(List.drop(c, 3))
 
     println("dropWhile")
-    println(List.dropWhile(Nil, (x:Int) => x < 99))
-    println(List.dropWhile(a, (x:Int) => x < 99))
-    println(List.dropWhile(a, (x:Int) => x < 3))
-    println(List.dropWhile(a, (x:Int) => x != 5))
+    println(List.dropWhile(a)(x => x < 99))
+    println(List.dropWhile(a)(x => x < 3))
+    println(List.dropWhile(a)(x => x != 5))
 
     println("init")
     println(List.init(a))
     println(List.init(List(1,2,3)))
     println(List.init(List(1,2)))
+
+    println("sum")
+    println(List.sum2(List(1,2,3,4)))
+    println(List.sum2(List(1,2,3)))
   }
 }
