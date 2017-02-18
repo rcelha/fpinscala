@@ -100,5 +100,14 @@ object Main {
 
     println("# combine")
     println(List.combine(List(1,2,3), List(4,5,6))(_ + _))
+
+    println("# hasSubsequence")
+    println(List.hasSubsequence(List(1,2,3,4), List(1)))
+    println(List.hasSubsequence(List(1,2,3,4), List(1,2)))
+    println(List.hasSubsequence(List(1,2,3,4), List(2,3)))
+    println(List.hasSubsequence(List(1,2,3,4), List(3,4)))
+    println(List.hasSubsequence(List(1,2,3,4), List(4)))
+    println(List.hasSubsequence(List(1,2,3,4), List(5)))
+    println(List.hasSubsequence(List(1,2,3,4), List(3,4,5)))
   }
 }

@@ -144,4 +144,15 @@ object List { // `List` companion object. Contains functions for creating and wo
     case (Cons(h, t), Cons(h2, t2)) => Cons(f(h, h2), combine(t, t2)(f))
   }
 
+  def startsWith[A](l: List[A], prefix: List[A]): Boolean = (l, prefix) match {
+    case (_, Nil) => true
+    case (Cons(h1, t1), Cons(h2, t2)) if h1 == h2 => startsWith(t1, t2)
+    case _ => false
+  }
+
+  def hasSubsequence[A](l: List[A], sub: List[A]): Boolean = l match {
+    case Nil => sub == Nil
+    case _ if startsWith(l, sub) => true
+    case Cons(_, t) => hasSubsequence(t, sub)
+  }
 }
