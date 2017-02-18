@@ -109,5 +109,31 @@ object Main {
     println(List.hasSubsequence(List(1,2,3,4), List(4)))
     println(List.hasSubsequence(List(1,2,3,4), List(5)))
     println(List.hasSubsequence(List(1,2,3,4), List(3,4,5)))
+
+    // Trees
+    val t1 = Branch[Int](
+      Branch(Leaf(1), Branch(Leaf(2), Leaf(5))),
+      Branch(Leaf(4), Leaf(3))
+    )
+    println("### TREE ###")
+    println(t1)
+
+    println(" #size")
+    println(Tree.size(t1))
+    println(Tree.size2(t1))
+
+    println(" #maximum")
+    println(Tree.maximum(t1))
+    println(Tree.maximum2(t1))
+
+    println(" #depth")
+    println(Tree.depth(t1))
+    println(Tree.depth2(t1))
+
+    print(" #map")
+    println(Tree.map(t1)(_ + 1))
+    println(Tree.map2(t1)(_ + 1))
+    println(Tree.map(t1)("#" + _.toString))
+    println(Tree.map2(t1)("#" + _.toString))
   }
 }
