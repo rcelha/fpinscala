@@ -114,5 +114,34 @@ object List { // `List` companion object. Contains functions for creating and wo
   def appendAll[A](lists: List[List[A]]): List[A] =
     foldRight(lists, List[A]())(append)
 
-  def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
+
+  def plus1(l: List[Int]): List[Int] =
+    foldRight(l, List[Int]())((i, newL) => Cons(i + 1, newL))
+
+  def doublesToStr(l:List[Double]): List[String] = 
+    foldRight(l, List[String]())((i, newL) => Cons(i.toString, newL))
+
+  def map[A,B](l: List[A])(f: A => B): List[B] =
+    foldRight(l, List[B]())((h, t) => Cons(f(h), t))
+
+  def filter[A](l: List[A])(f: A => Boolean): List[A] =
+    foldRight(l, Nil:List[A])((h, t) =>
+      if (f(h)) Cons(h, t)
+      else t
+    )
+
+  def flatMap[A,B](l: List[A])(f: A => List[B]): List[B] =
+    appendAll(map(l)(f))
+
+  def filter2[A](l: List[A])(f: A => Boolean): List[A] =
+    flatMap(l)(x => if (f(x)) List(x) else Nil)
+
+  def plus(l1: List[Int], l2: List[Int]): List[Int] = combine(l1, l2)(_ + _)
+
+  def combine[A](l1: List[A], l2: List[A])(f: (A, A) => A): List[A] = (l1, l2) match {
+    case (_, Nil) => Nil
+    case (Nil, _) => Nil
+    case (Cons(h, t), Cons(h2, t2)) => Cons(f(h, h2), combine(t, t2)(f))
+  }
+
 }

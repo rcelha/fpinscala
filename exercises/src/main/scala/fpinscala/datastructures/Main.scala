@@ -76,5 +76,29 @@ object Main {
 
     println("# appendAll")
     println(List.appendAll(List(List(1,2,3), List(4,5,6), List(7,8,9))))
+
+    println("# plus1")
+    println(List.plus1(List(1,2,3,4)))
+
+    println("# toString")
+    println(List.doublesToStr(List(1.000001,2.0,3.4)))
+
+    println("# map")
+    println(List.map(List(1,2,3,4))(_ * 2))
+
+    println("# filter")
+    println(List.filter(List(1,2,3,4))(_ % 2 == 0))
+
+    println("# flatMap")
+    println(List.flatMap(List(1,2,3,4))(i => List(i, i * i)))
+
+    println("# filter2")
+    println(List.filter2(List(1,2,3,4))(_ % 2 == 0))
+
+    println("# plus")
+    println(List.plus(List(1,2,3), List(4,5,6)))
+
+    println("# combine")
+    println(List.combine(List(1,2,3), List(4,5,6))(_ + _))
   }
 }
