@@ -2,6 +2,7 @@ package fpinscala.errorhandling
 
 
 import scala.{Option => _, Some => _, Either => _, _} // hide std library `Option`, `Some` and `Either`, since we are writing our own in this chapter
+import java.util.regex._
 
 sealed trait Option[+A] {
   def map[B](f: A => B): Option[B] = this match {
@@ -53,7 +54,24 @@ object Option {
     .map(m => xs.map(x => math.pow(x - m, 2)))
     .flatMap(mean(_))
 
-  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = sys.error("todo")
+  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = 
+    for {
+      aa <- a
+      bb <- b
+    } yield f(aa, bb)
+
+  def pattern(s: String): Option[Pattern] =
+    try {
+      Some(Pattern.compile(s))
+    } catch {
+      case e: PatternSyntaxException => {
+        println(s"Erro $e")
+        None
+      }
+    }
+
+  def bothMatch_2(pat1: String, pat2: String, s:String): Option[Boolean] =
+    map2(pattern(pat1), pattern(pat2))((p1, p2) => p1.matcher(s).matches && p2.matcher(s).matches)
 
   def sequence[A](a: List[Option[A]]): Option[List[A]] = sys.error("todo")
 

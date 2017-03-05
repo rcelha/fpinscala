@@ -33,5 +33,15 @@ object Main {
     println("### variance")
     println(Option.variance(List(7, 6, 8, 4, 2, 7, 6, 7, 6, 5)))
 
+    println("### map2")
+    println(Option.map2(Some("Foo"), Some("Bla"))(_ + " " +  _))
+    println(Option.map2(opt1, Some("Bla"))(_ + _))
+    println(Option.map2(Some("Foo"), opt1)(_ + _))
+    println(Option.map2(opt1, opt1)(_ + _))
+
+    println("### bothMatch_1")
+    println(Option bothMatch_2("T.*", ".*99", "Test 99"))
+    println(Option bothMatch_2("Z.*", ".*99", "Test 99"))
+    println(Option bothMatch_2("T.*", ".*666", "Test 99"))
   }
 }
