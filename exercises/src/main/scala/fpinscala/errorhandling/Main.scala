@@ -30,5 +30,8 @@ object Main {
     println(Some(9) filter(_ > 10))
     println(opt2 filter(_ > 10))
 
+    println("### variance")
+    println(Option.variance(List(7, 6, 8, 4, 2, 7, 6, 7, 6, 5)))
+
   }
 }
