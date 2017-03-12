@@ -54,7 +54,7 @@ object Option {
     .map(m => xs.map(x => math.pow(x - m, 2)))
     .flatMap(mean(_))
 
-  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = 
+  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
     for {
       aa <- a
       bb <- b
@@ -73,7 +73,31 @@ object Option {
   def bothMatch_2(pat1: String, pat2: String, s:String): Option[Boolean] =
     map2(pattern(pat1), pattern(pat2))((p1, p2) => p1.matcher(s).matches && p2.matcher(s).matches)
 
-  def sequence[A](a: List[Option[A]]): Option[List[A]] = sys.error("todo")
+  def sequence[A](a: List[Option[A]]): Option[List[A]] = a match {
+    case Nil => Some(Nil)
+    case h :: t => h flatMap (hh => sequence(t) map (tt => hh :: tt) ) // ????
+  }
 
-  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = sys.error("todo")
+
+  /*
+  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = a match {
+    case Nil => Some(Nil)
+    case h :: t =>
+      f(h) match {
+        case None => None:Option[List[B]]
+        case Some(ho) =>
+          traverse(t)(f) map (ho :: _)
+      }
+  }
+  */
+
+  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = a match {
+    case Nil => Some(Nil)
+    case h :: t => f(h) flatMap (hh => traverse(t)(f) map (hh :: _))
+    // case h :: t => map2(f(h), traverse(t)(f))(_ :: _) // with map2
+  }
+
+  def sequence2[A](a: List[Option[A]]): Option[List[A]] =
+    traverse(a)(x => x) // ?? 
+    // traverse(a)(_ map (x => x))
 }
