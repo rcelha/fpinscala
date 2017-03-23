@@ -27,5 +27,18 @@ object Main {
     println("## foldedTakeWhile")
     println(intStream foldedTakeWhile (_ < 5) toList)
     println(intStream foldedTakeWhile (_ < 50) toList)
+
+    println("## map")
+    println(intStream map (x => s"R$$${x}") toList)
+
+    println("## filter")
+    println(intStream filter (_ % 2 == 0) toList)
+    println(intStream filter (_ % 2 != 0) toList)
+
+    println("## append")
+    println(intStream append Stream(99,100) append Stream(101, 102) toList)
+
+    println("## flatMap")
+    println(intStream flatMap (x => Stream(x + 10, x + 100)) toList)
   }
 }
