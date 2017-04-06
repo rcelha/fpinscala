@@ -87,6 +87,12 @@ object Main {
     println(intStream zipAll(Stream(11,12,13,14,15,16), 666, 999) toList)
     println(intStream zipAll(Stream(11,12,13,14), 666, 999) toList)
     println(intStream zipAll(Stream(11,12,13,14,15,16,17,18), 666, 999) toList)
+    println(Stream(1,2,3) zipAll(Stream(1,2), 0, 0) toList)
 
+    println("## startsWith")
+    println(Stream(1,2,3) startsWith Stream(1,2))
+    println(Stream(1,2,3) startsWith Stream(1,2,3,4))
+    println(Stream(1,2,4,5,6) startsWith Stream(1,2,3,4))
+    println(Stream(1,2,4,5,6) startsWith Stream(1,2,3))
   }
 }
