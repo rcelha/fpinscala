@@ -61,5 +61,12 @@ object Main {
     println(RNG.doubleViaMap(rnd5))
 
     println("## map2")
+    println(RNG.map2(RNG.nonNegativeInt, RNG.nonNegativeInt)((a,b) => (b,a)) (rnd1))
+
+    println("## sequence")
+    println(RNG.sequence(List(RNG.unit(10), RNG.unit(20), RNG.unit(30)))(rnd1)._1 )
+
+    println("## intsViaSequence")
+    println(RNG.intsViaSequence(5)(foo))
   }
 }
